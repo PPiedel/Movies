@@ -68,6 +68,7 @@ public class MovieDetails extends AppCompatActivity{
             }
         });
 
+        Log.d(LOG_TAG,"Movie id" + movie.getId());
         Log.d(LOG_TAG,"Movie info.");
         Log.d(LOG_TAG,"Title " + movie.getTitle());
         Log.d(LOG_TAG,"Original title : " + movie.getOriginalTitle());
