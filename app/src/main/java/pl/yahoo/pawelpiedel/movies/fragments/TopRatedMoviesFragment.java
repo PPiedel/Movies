@@ -34,6 +34,8 @@ import retrofit2.Response;
  */
 public class TopRatedMoviesFragment extends Fragment {
     private static final String LOG_TAG = TopRatedMoviesFragment.class.getSimpleName();
+
+    private Bundle savedState = null;
     private List<Movie> movies = new ArrayList<>(60);
     private MoviesAdapter moviesAdapter;
     private RecyclerView recyclerView;
@@ -52,16 +54,17 @@ public class TopRatedMoviesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.top_rated_fragment_layout,container, false);
+        View view = inflater.inflate(R.layout.top_rated_fragment_layout,container, false);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_top_rated);
+
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        recyclerView = (RecyclerView) getActivity().findViewById(R.id.recycler_view_top_rated);
-        assert recyclerView != null;
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(),2);
@@ -73,11 +76,25 @@ public class TopRatedMoviesFragment extends Fragment {
             public void onLoadMore(int page, int totalItemsCount) {
                 Log.d(LOG_TAG,"onLoadMore method reached");
                 currentPage = page ;
-                loadMoreMovies(currentPage+1);
+                loadMovies(currentPage+1);
+
             }
         });
 
         loadMovies(currentPage);
+
+        moviesAdapter = new MoviesAdapter(getContext(), movies );
+        moviesAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent movieDetailsIntent = new Intent(getContext(),MovieDetails.class);
+                movieDetailsIntent.putExtra("movie",movies.get(position));
+                startActivity(movieDetailsIntent);
+            }
+        });
+
+        recyclerView.setAdapter(moviesAdapter);
+
 
     }
 
@@ -94,40 +111,6 @@ public class TopRatedMoviesFragment extends Fragment {
 
                 movies.addAll(response.body().getMovies()) ;
                 Log.d(LOG_TAG, "Total loaded movies: " + movies.size() );
-
-                moviesAdapter = new MoviesAdapter(getContext(), movies );
-                moviesAdapter.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Intent movieDetailsIntent = new Intent(getContext(),MovieDetails.class);
-                        movieDetailsIntent.putExtra("movie",movies.get(position));
-                        startActivity(movieDetailsIntent);
-                    }
-                });
-
-                recyclerView.setAdapter(moviesAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
-                Log.e(LOG_TAG,t.toString());
-            }
-        });
-
-    }
-
-    public void loadMoreMovies(int page) {
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<MovieResponse> movieResponseCall = apiService.getTopRatedMovies(MainActivity.API_KEY,page);
-
-        movieResponseCall.enqueue(new Callback<MovieResponse>() {
-            @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                int responseCode = response.code();
-                Log.d(LOG_TAG,""+responseCode);
-                Log.d(LOG_TAG,"Actual page : "+response.body().getPage());
-
-                movies.addAll(response.body().getMovies());
 
                 moviesAdapter.notifyDataSetChanged();
 

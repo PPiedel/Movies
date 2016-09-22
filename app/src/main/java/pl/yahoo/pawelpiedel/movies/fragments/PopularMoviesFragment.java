@@ -30,7 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PopularMoviesFragment extends Fragment {
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private static final String LOG_TAG = PopularMoviesFragment.class.getSimpleName();
 
     private RecyclerView recyclerView;
     private List<Movie> movies = new ArrayList<>(60);
@@ -58,7 +58,6 @@ public class PopularMoviesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.recycler_view_popular);
-        assert recyclerView != null;
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(),2);
@@ -70,11 +69,24 @@ public class PopularMoviesFragment extends Fragment {
             public void onLoadMore(int page, int totalItemsCount) {
                 Log.d(LOG_TAG,"onLoadMore method reached");
                 currentPage = page ;
-                loadMoreMovies(currentPage+1);
+                loadMovies(currentPage+1);
+
             }
         });
 
         loadMovies(currentPage);
+
+        moviesAdapter = new MoviesAdapter(getContext(), movies );
+        moviesAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent movieDetailsIntent = new Intent(getContext(),MovieDetails.class);
+                movieDetailsIntent.putExtra("movie",movies.get(position));
+                startActivity(movieDetailsIntent);
+            }
+        });
+
+        recyclerView.setAdapter(moviesAdapter);
     }
 
     public void loadMovies(int page){
@@ -91,42 +103,7 @@ public class PopularMoviesFragment extends Fragment {
                 movies.addAll(response.body().getMovies()) ;
                 Log.d(LOG_TAG, "Total loaded movies: " + movies.size() );
 
-                moviesAdapter = new MoviesAdapter(getContext(), movies );
-                moviesAdapter.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Intent movieDetailsIntent = new Intent(getContext(),MovieDetails.class);
-                        movieDetailsIntent.putExtra("movie",movies.get(position));
-                        startActivity(movieDetailsIntent);
-                    }
-                });
-
-                recyclerView.setAdapter(moviesAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
-                Log.e(LOG_TAG,t.toString());
-            }
-        });
-
-    }
-
-    public void loadMoreMovies(int page) {
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<MovieResponse> movieResponseCall = apiService.getPopularMovies(MainActivity.API_KEY,page);
-
-        movieResponseCall.enqueue(new Callback<MovieResponse>() {
-            @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                int responseCode = response.code();
-                Log.d(LOG_TAG,""+responseCode);
-                Log.d(LOG_TAG,"Actual page : "+response.body().getPage());
-
-                movies.addAll(response.body().getMovies());
-
                 moviesAdapter.notifyDataSetChanged();
-
             }
 
             @Override
