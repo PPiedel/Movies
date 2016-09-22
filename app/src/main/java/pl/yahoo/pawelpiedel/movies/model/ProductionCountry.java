@@ -1,11 +1,14 @@
 package pl.yahoo.pawelpiedel.movies.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by pawelpiedel on 22.09.16.
  */
-public class ProductionCountry {
+public class ProductionCountry implements Parcelable {
 
     @SerializedName("iso_3166_1")
     public String iso31661;
@@ -28,4 +31,33 @@ public class ProductionCountry {
     public void setName(String name) {
         this.name = name;
     }
+
+    protected ProductionCountry(Parcel in) {
+        iso31661 = in.readString();
+        name = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(iso31661);
+        dest.writeString(name);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<ProductionCountry> CREATOR = new Parcelable.Creator<ProductionCountry>() {
+        @Override
+        public ProductionCountry createFromParcel(Parcel in) {
+            return new ProductionCountry(in);
+        }
+
+        @Override
+        public ProductionCountry[] newArray(int size) {
+            return new ProductionCountry[size];
+        }
+    };
 }
