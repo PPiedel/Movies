@@ -1,4 +1,4 @@
-package pl.yahoo.pawelpiedel.movies.model;
+package pl.yahoo.pawelpiedel.movies.model.movies;
 
 import com.google.gson.annotations.SerializedName;
 

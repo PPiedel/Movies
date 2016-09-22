@@ -15,7 +15,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.List;
 
 import pl.yahoo.pawelpiedel.movies.R;
-import pl.yahoo.pawelpiedel.movies.model.Movie;
+import pl.yahoo.pawelpiedel.movies.model.movies.Movie;
 
 /**
  * Created by pawelpiedel on 21.08.16.

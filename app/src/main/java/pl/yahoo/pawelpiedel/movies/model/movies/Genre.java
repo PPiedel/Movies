@@ -1,4 +1,4 @@
-package pl.yahoo.pawelpiedel.movies.model;
+package pl.yahoo.pawelpiedel.movies.model.movies;
 
 import android.os.Parcel;
 import android.os.Parcelable;

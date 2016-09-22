@@ -1,7 +1,8 @@
 package pl.yahoo.pawelpiedel.movies.rest;
 
-import pl.yahoo.pawelpiedel.movies.model.Movie;
-import pl.yahoo.pawelpiedel.movies.model.MovieResponse;
+import pl.yahoo.pawelpiedel.movies.model.images.MovieImageResponse;
+import pl.yahoo.pawelpiedel.movies.model.movies.Movie;
+import pl.yahoo.pawelpiedel.movies.model.movies.MovieResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -23,5 +24,8 @@ public interface ApiInterface {
 
     @GET("movie/{id}")
     Call<Movie> getMovieDetails(@Path(MOVIE_ID_PARAM) Integer id, @Query(API_KEY_PARAM) String apiKey);
+
+    @GET("movie/{id}/images")
+    Call<MovieImageResponse> getMovieImages(@Path(MOVIE_ID_PARAM) Integer id, @Query(API_KEY_PARAM) String apiKey);
 
 }

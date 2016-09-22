@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.yahoo.pawelpiedel.movies.R;
 import pl.yahoo.pawelpiedel.movies.adapter.MoviesAdapter;
-import pl.yahoo.pawelpiedel.movies.model.Movie;
+import pl.yahoo.pawelpiedel.movies.model.movies.Movie;
 import pl.yahoo.pawelpiedel.movies.rest.ApiClient;
 import pl.yahoo.pawelpiedel.movies.rest.ApiInterface;
 import pl.yahoo.pawelpiedel.movies.utils.ScrollUtils;
@@ -60,6 +60,8 @@ public class MovieDetails extends AppCompatActivity{
 
         movie = getMovieFromIntentExtras();
         loadMovieDetails(movie.getId());
+
+        Log.d(LOG_TAG, "ID : " + movie.getId());
         Log.d(LOG_TAG,"Runtime 2 : "+movie.getRuntime());
 
         mParallaxImageHeight = getResources().getDimensionPixelSize(R.dimen.parallax_image_height);
@@ -91,7 +93,7 @@ public class MovieDetails extends AppCompatActivity{
         setRatingBar();
 
         setReviewText();
-        
+
 
 
     }
@@ -130,6 +132,9 @@ public class MovieDetails extends AppCompatActivity{
     }
 
     private void setRuntime() {
+        /*It products NullPointerException because setters in "enqueue" method doesn't work. Don't know why. ? .
+         * Is it because anonymous class ??? */
+
        // runtimeTextView.setText(movie.getRuntime());
     }
 
