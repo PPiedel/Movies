@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewTreeObserver;
@@ -26,8 +27,11 @@ import pl.yahoo.pawelpiedel.movies.utils.ScrollUtils;
 
 
 public class MovieDetails extends AppCompatActivity{
+    private static final String LOG_TAG = MovieDetails.class.getSimpleName();
+
     private Movie movie;
     private int mParallaxImageHeight;
+    int ratingStarsNumber = 5;
 
     @BindView(R.id.scroll) ScrollView mScrollView;
     @BindView(R.id.movie_detail_toolbar) Toolbar toolbar;
@@ -37,6 +41,7 @@ public class MovieDetails extends AppCompatActivity{
     @BindView(R.id.ratingBar) RatingBar ratingBar;
     @BindView(R.id.details_movie_title) TextView movieTitle;
     @BindView(R.id.release_date) TextView releaseDateTextView;
+    @BindView(R.id.original_laguage_text_view) TextView originalLanguageTextView;
 
 
 
@@ -46,9 +51,10 @@ public class MovieDetails extends AppCompatActivity{
         setContentView(R.layout.movie_details);
         ButterKnife.bind(this);
 
-        setToolbar();
+        setUpToolbar();
 
         movie = getMovieFromIntentExtras();
+        mParallaxImageHeight = getResources().getDimensionPixelSize(R.dimen.parallax_image_height);
 
         mScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
             @Override
@@ -62,19 +68,26 @@ public class MovieDetails extends AppCompatActivity{
             }
         });
 
+        Log.d(LOG_TAG,"Movie info.");
+        Log.d(LOG_TAG,"Title " + movie.getTitle());
+        Log.d(LOG_TAG,"Original title : " + movie.getOriginalTitle());
+        Log.d(LOG_TAG,"Original language : " + movie.getOriginalLanguage());
+        Log.d(LOG_TAG,"Popularity : " + movie.getPopularity());
+        Log.d(LOG_TAG,"Vote average : " + movie.getVoteAverage());
+        Log.d(LOG_TAG,"Vote count" + movie.getVoteCount());
+        Log.d(LOG_TAG,"Video : " + movie.getVideo());
+        Log.d(LOG_TAG,"Adult : " + movie.getAdult());
 
-        mParallaxImageHeight = getResources().getDimensionPixelSize(R.dimen.parallax_image_height);
 
-        Glide.with(getApplicationContext()).load(MoviesAdapter.POSTER_BASE_URL+movie.getBackdropPath())
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .into(movieImageView);
-
+        loadMovieBackdrop();
 
         setMovieTitle();
 
         setToolbarBackgroundColor();
 
         setReleaseDate();
+
+        setOrignalLanguage();
 
         setRatingBar();
 
@@ -83,20 +96,30 @@ public class MovieDetails extends AppCompatActivity{
 
     }
 
+    private void setOrignalLanguage() {
+        originalLanguageTextView.setText(movie.getOriginalLanguage());
+    }
+
+    private void loadMovieBackdrop() {
+        Glide.with(getApplicationContext()).load(MoviesAdapter.POSTER_BASE_URL+movie.getBackdropPath())
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .into(movieImageView);
+    }
+
     private void setReleaseDate() {
         releaseDateTextView.setText(movie.getReleaseDate());
     }
 
     private void setRatingBar() {
-        int ratingStarsNumber = 5;
-        ratingBar.setRating((Float.parseFloat(movie.getVoteAverage().toString()))/ ratingStarsNumber);
+        double ratingProcent = movie.getVoteAverage()/10;
+        ratingBar.setRating((float) ratingProcent*ratingStarsNumber);
     }
 
     private void setMovieTitle() {
         movieTitle.setText(movie.getTitle());
     }
 
-    private Toolbar setToolbar() {
+    private Toolbar setUpToolbar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
