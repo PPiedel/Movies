@@ -8,5 +8,6 @@
     <string name="menu">Menu</string>
     <string name="movies">Movies</string>
     <string name="image_cover">Image cover</string>
+    <string name="movie_release_date">Movie release date</string>
 
 </resources>
