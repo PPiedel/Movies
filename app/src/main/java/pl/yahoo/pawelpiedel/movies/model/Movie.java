@@ -462,6 +462,69 @@ public class Movie implements Parcelable {
                 ", voteCount=" + voteCount +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Movie)) return false;
+
+        Movie movie = (Movie) o;
+
+        if (!getAdult().equals(movie.getAdult())) return false;
+        if (!getBackdropPath().equals(movie.getBackdropPath())) return false;
+        if (!getBudget().equals(movie.getBudget())) return false;
+        if (!getGenres().equals(movie.getGenres())) return false;
+        if (!getHomepage().equals(movie.getHomepage())) return false;
+        if (!getId().equals(movie.getId())) return false;
+        if (!getImdbId().equals(movie.getImdbId())) return false;
+        if (!getOriginalLanguage().equals(movie.getOriginalLanguage())) return false;
+        if (!getOriginalTitle().equals(movie.getOriginalTitle())) return false;
+        if (!getOverview().equals(movie.getOverview())) return false;
+        if (!getPopularity().equals(movie.getPopularity())) return false;
+        if (!getPosterPath().equals(movie.getPosterPath())) return false;
+        if (!getProductionCompanies().equals(movie.getProductionCompanies())) return false;
+        if (!getProductionCountries().equals(movie.getProductionCountries())) return false;
+        if (!getReleaseDate().equals(movie.getReleaseDate())) return false;
+        if (!getRevenue().equals(movie.getRevenue())) return false;
+        if (!getRuntime().equals(movie.getRuntime())) return false;
+        if (!getSpokenLanguages().equals(movie.getSpokenLanguages())) return false;
+        if (!getStatus().equals(movie.getStatus())) return false;
+        if (!getTagline().equals(movie.getTagline())) return false;
+        if (!getTitle().equals(movie.getTitle())) return false;
+        if (!getVideo().equals(movie.getVideo())) return false;
+        if (!getVoteAverage().equals(movie.getVoteAverage())) return false;
+        return getVoteCount().equals(movie.getVoteCount());
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getAdult().hashCode();
+        result = 31 * result + getBackdropPath().hashCode();
+        result = 31 * result + getBudget().hashCode();
+        result = 31 * result + getGenres().hashCode();
+        result = 31 * result + getHomepage().hashCode();
+        result = 31 * result + getId().hashCode();
+        result = 31 * result + getImdbId().hashCode();
+        result = 31 * result + getOriginalLanguage().hashCode();
+        result = 31 * result + getOriginalTitle().hashCode();
+        result = 31 * result + getOverview().hashCode();
+        result = 31 * result + getPopularity().hashCode();
+        result = 31 * result + getPosterPath().hashCode();
+        result = 31 * result + getProductionCompanies().hashCode();
+        result = 31 * result + getProductionCountries().hashCode();
+        result = 31 * result + getReleaseDate().hashCode();
+        result = 31 * result + getRevenue().hashCode();
+        result = 31 * result + getRuntime().hashCode();
+        result = 31 * result + getSpokenLanguages().hashCode();
+        result = 31 * result + getStatus().hashCode();
+        result = 31 * result + getTagline().hashCode();
+        result = 31 * result + getTitle().hashCode();
+        result = 31 * result + getVideo().hashCode();
+        result = 31 * result + getVoteAverage().hashCode();
+        result = 31 * result + getVoteCount().hashCode();
+        return result;
+    }
 }
 
 

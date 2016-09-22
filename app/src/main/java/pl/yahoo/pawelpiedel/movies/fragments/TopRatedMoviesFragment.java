@@ -35,7 +35,6 @@ import retrofit2.Response;
 public class TopRatedMoviesFragment extends Fragment {
     private static final String LOG_TAG = TopRatedMoviesFragment.class.getSimpleName();
 
-    private Bundle savedState = null;
     private List<Movie> movies = new ArrayList<>(60);
     private MoviesAdapter moviesAdapter;
     private RecyclerView recyclerView;
@@ -105,6 +104,7 @@ public class TopRatedMoviesFragment extends Fragment {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 Log.d(LOG_TAG,""+response.code());
+                Log.d(LOG_TAG, movieResponseCall.request().toString());
                 Log.d(LOG_TAG,"Total pages : " + response.body().getTotalPages());
                 Log.d(LOG_TAG,"Actual page : " + response.body().getPage());
                 Log.d(LOG_TAG,"Total movies : " + response.body().getTotalMovies());

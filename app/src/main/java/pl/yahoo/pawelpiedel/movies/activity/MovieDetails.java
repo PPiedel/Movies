@@ -17,13 +17,17 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.yahoo.pawelpiedel.movies.R;
 import pl.yahoo.pawelpiedel.movies.adapter.MoviesAdapter;
 import pl.yahoo.pawelpiedel.movies.model.Movie;
+import pl.yahoo.pawelpiedel.movies.rest.ApiClient;
+import pl.yahoo.pawelpiedel.movies.rest.ApiInterface;
 import pl.yahoo.pawelpiedel.movies.utils.ScrollUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MovieDetails extends AppCompatActivity{
@@ -31,7 +35,7 @@ public class MovieDetails extends AppCompatActivity{
 
     private Movie movie;
     private int mParallaxImageHeight;
-    int ratingStarsNumber = 5;
+    private int ratingStarsNumber = 5;
 
     @BindView(R.id.scroll) ScrollView mScrollView;
     @BindView(R.id.movie_detail_toolbar) Toolbar toolbar;
@@ -42,6 +46,7 @@ public class MovieDetails extends AppCompatActivity{
     @BindView(R.id.details_movie_title) TextView movieTitle;
     @BindView(R.id.release_date) TextView releaseDateTextView;
     @BindView(R.id.original_laguage_text_view) TextView originalLanguageTextView;
+    @BindView(R.id.runtime_text_view) TextView runtimeTextView;
 
 
 
@@ -54,6 +59,9 @@ public class MovieDetails extends AppCompatActivity{
         setUpToolbar();
 
         movie = getMovieFromIntentExtras();
+        loadMovieDetails(movie.getId());
+        Log.d(LOG_TAG,"Runtime 2 : "+movie.getRuntime());
+
         mParallaxImageHeight = getResources().getDimensionPixelSize(R.dimen.parallax_image_height);
 
         mScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
@@ -68,10 +76,6 @@ public class MovieDetails extends AppCompatActivity{
             }
         });
 
-        Log.d(LOG_TAG,"Movie info : ");
-        Log.d(LOG_TAG,movie.toString());
-
-
         loadMovieBackdrop();
 
         setMovieTitle();
@@ -82,11 +86,51 @@ public class MovieDetails extends AppCompatActivity{
 
         setOrignalLanguage();
 
+        setRuntime();
+
         setRatingBar();
 
         setReviewText();
+        
 
 
+    }
+
+    public void loadMovieDetails(int id){
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<Movie> movieCall = apiService.getMovieDetails(id,MainActivity.API_KEY);
+        movieCall.enqueue(new Callback<Movie>() {
+            @Override
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
+                Movie detailedMovie = response.body();
+
+                Log.d(LOG_TAG,"Movie info : ");
+                Log.d(LOG_TAG,detailedMovie.toString());
+                Log.d(LOG_TAG,"Runtime 0 : " + detailedMovie.getRuntime());
+
+                movie.setRuntime(detailedMovie.getRuntime());
+                Log.d(LOG_TAG,"Runtime 1 : "+movie.getRuntime());
+
+                movie.setBudget(detailedMovie.getBudget());
+                movie.setGenres(detailedMovie.getGenres());
+                movie.setHomepage(detailedMovie.getHomepage());
+                movie.setProductionCompanies(detailedMovie.getProductionCompanies());
+                movie.setProductionCountries(detailedMovie.getProductionCountries());
+                movie.setSpokenLanguages(detailedMovie.getSpokenLanguages());
+
+            }
+
+            @Override
+            public void onFailure(Call<Movie> call, Throwable t) {
+                Log.e(LOG_TAG,t.toString());
+            }
+        });
+
+
+    }
+
+    private void setRuntime() {
+       // runtimeTextView.setText(movie.getRuntime());
     }
 
     private void setOrignalLanguage() {
