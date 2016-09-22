@@ -68,16 +68,8 @@ public class MovieDetails extends AppCompatActivity{
             }
         });
 
-        Log.d(LOG_TAG,"Movie id" + movie.getId());
-        Log.d(LOG_TAG,"Movie info.");
-        Log.d(LOG_TAG,"Title " + movie.getTitle());
-        Log.d(LOG_TAG,"Original title : " + movie.getOriginalTitle());
-        Log.d(LOG_TAG,"Original language : " + movie.getOriginalLanguage());
-        Log.d(LOG_TAG,"Popularity : " + movie.getPopularity());
-        Log.d(LOG_TAG,"Vote average : " + movie.getVoteAverage());
-        Log.d(LOG_TAG,"Vote count" + movie.getVoteCount());
-        Log.d(LOG_TAG,"Video : " + movie.getVideo());
-        Log.d(LOG_TAG,"Adult : " + movie.getAdult());
+        Log.d(LOG_TAG,"Movie info : ");
+        Log.d(LOG_TAG,movie.toString());
 
 
         loadMovieBackdrop();
