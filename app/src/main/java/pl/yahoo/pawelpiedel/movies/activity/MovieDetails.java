@@ -64,19 +64,6 @@ public class MovieDetails extends AppCompatActivity{
         Log.d(LOG_TAG, "ID : " + movie.getId());
         Log.d(LOG_TAG,"Runtime 2 : "+movie.getRuntime());
 
-        mParallaxImageHeight = getResources().getDimensionPixelSize(R.dimen.parallax_image_height);
-
-        mScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                int scrollY = mScrollView.getScrollY();
-
-                int baseColor = getResources().getColor(R.color.colorPrimary);
-                float alpha = Math.min(1, (float) scrollY / mParallaxImageHeight);
-                toolbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(alpha, baseColor));
-
-            }
-        });
 
         loadMovieBackdrop();
 
