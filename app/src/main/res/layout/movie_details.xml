@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:numStars="5"
                     android:scrollbarSize="15dp"
-                    android:clickable="false"
+                    android:isIndicator="true"
                     android:theme="@style/RatingBar"/>
 
                 <TextView
