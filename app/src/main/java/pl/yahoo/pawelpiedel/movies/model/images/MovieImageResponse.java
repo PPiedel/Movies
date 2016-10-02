@@ -19,4 +19,12 @@ public class MovieImageResponse {
     @SerializedName("posters")
     public List<Poster> posters = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "MovieImageResponse{" +
+                "id=" + id +
+                ", backdrops=" + backdrops +
+                ", posters=" + posters +
+                '}';
+    }
 }

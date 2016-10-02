@@ -2,6 +2,7 @@ package pl.yahoo.pawelpiedel.movies.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
@@ -17,10 +18,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.yahoo.pawelpiedel.movies.R;
 import pl.yahoo.pawelpiedel.movies.adapter.MoviesAdapter;
+import pl.yahoo.pawelpiedel.movies.model.images.Backdrop;
+import pl.yahoo.pawelpiedel.movies.model.images.MovieImageResponse;
 import pl.yahoo.pawelpiedel.movies.model.movies.Movie;
 import pl.yahoo.pawelpiedel.movies.rest.ApiClient;
 import pl.yahoo.pawelpiedel.movies.rest.ApiInterface;
@@ -33,7 +39,9 @@ import retrofit2.Response;
 public class MovieDetails extends AppCompatActivity{
     private static final String LOG_TAG = MovieDetails.class.getSimpleName();
 
+    private static final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
     private Movie movie;
+    private List<Backdrop> backdrops = new ArrayList<>(20);
     private int mParallaxImageHeight;
     private int ratingStarsNumber = 5;
 
@@ -59,8 +67,10 @@ public class MovieDetails extends AppCompatActivity{
         setUpToolbar();
 
         movie = getMovieFromIntentExtras();
+
         loadMovieDetails(movie.getId());
 
+        Log.d(LOG_TAG,"Backdrops loaded : " + backdrops.size() );
         Log.d(LOG_TAG, "ID : " + movie.getId());
         Log.d(LOG_TAG,"Runtime 2 : "+movie.getRuntime());
 
@@ -95,11 +105,9 @@ public class MovieDetails extends AppCompatActivity{
         setReviewText();
 
 
-
     }
 
     public void loadMovieDetails(int id){
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<Movie> movieCall = apiService.getMovieDetails(id,MainActivity.API_KEY);
         movieCall.enqueue(new Callback<Movie>() {
             @Override
@@ -130,6 +138,7 @@ public class MovieDetails extends AppCompatActivity{
 
 
     }
+
 
     private void setRuntime() {
         /*It products NullPointerException because setters in "enqueue" method doesn't work. Don't know why. ? .

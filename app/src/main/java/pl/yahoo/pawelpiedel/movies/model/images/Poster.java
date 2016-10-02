@@ -8,24 +8,79 @@ import com.google.gson.annotations.SerializedName;
 public class Poster {
 
     @SerializedName("aspect_ratio")
-    public Double aspectRatio;
+    private Double aspectRatio;
 
     @SerializedName("file_path")
-    public String filePath;
+    private String filePath;
 
     @SerializedName("height")
-    public Integer height;
+    private Integer height;
 
     @SerializedName("iso_639_1")
-    public String iso6391;
+    private String iso6391;
 
     @SerializedName("vote_average")
-    public Integer voteAverage;
+    private Double voteAverage;
 
     @SerializedName("vote_count")
-    public Integer voteCount;
+    private Double voteCount;
 
     @SerializedName("width")
-    public Integer width;
+    private Integer width;
 
+    public Double getAspectRatio() {
+        return aspectRatio;
+    }
+
+    public void setAspectRatio(Double aspectRatio) {
+        this.aspectRatio = aspectRatio;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public String getIso6391() {
+        return iso6391;
+    }
+
+    public void setIso6391(String iso6391) {
+        this.iso6391 = iso6391;
+    }
+
+    public Double getVoteAverage() {
+        return voteAverage;
+    }
+
+    public void setVoteAverage(Double voteAverage) {
+        this.voteAverage = voteAverage;
+    }
+
+    public Double getVoteCount() {
+        return voteCount;
+    }
+
+    public void setVoteCount(Double voteCount) {
+        this.voteCount = voteCount;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
 }
