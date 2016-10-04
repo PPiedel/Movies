@@ -1,9 +1,11 @@
 package pl.yahoo.pawelpiedel.movies.fragments;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,9 +122,29 @@ public class TopRatedMoviesFragment extends Fragment {
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
                 Log.e(LOG_TAG,t.toString());
+                showAlertDialog();
             }
         });
 
+    }
+
+    public void showAlertDialog(){
+        // Display message in dialog box if you have not internet connection
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+        alertDialogBuilder.setTitle(getString(R.string.no_internet_connection));
+        alertDialogBuilder.setMessage(getString(R.string.please_check_your_internet_connection));
+
+        Toast.makeText(getActivity(), getString(R.string.something_went_wrong), Toast.LENGTH_LONG).show();
+        alertDialogBuilder.setPositiveButton(getString(R.string.refresh), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                //Toast.makeText(MainActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
 

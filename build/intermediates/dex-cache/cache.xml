@@ -1,2 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.4.0_2dcc94bb4d3f9c34775835608a7dd7268ec58404.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/internal_impl-23.4.0_f6c957af51bffc5a777b15c62495cf4ca45cb31d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/okio-1.6.0_37d705f1f1616d02739145a6c429d9cc7b88e7c1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/exploded-aar/com.android.support/design/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/com.android.support-design-23.4.0_287ef1945638134aa34e40f4ea7cbb2c981f93f9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.7.0/9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4/glide-3.7.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/glide-3.7.0_33401a8e24ae1ec5b1b634a57ff9f2fe8b632d91.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="cf1c7b53adce2eff4199c97180e271ee2f4f7848">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/instant-run_edebfb6c9c99ae550b8f1d21551a75059319f8ed.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/8.4.0/ea392375cf9ff59234a82e7928a204215ccc98cd/butterknife-annotations-8.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="ea392375cf9ff59234a82e7928a204215ccc98cd">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/butterknife-annotations-8.4.0_1cae8663b5dc1c8c3803d04f56390ae4afadb7c0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.2.0/f7873a2ebde246a45c2a8d6f3247108b4c88a879/okhttp-3.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="f7873a2ebde246a45c2a8d6f3247108b4c88a879">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/okhttp-3.2.0_9ca71408632f65bbd17cc1f178b87a611d2d1ab2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/exploded-aar/com.jakewharton/butterknife/8.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="a07818a1ecabdb149998823429cce555af4b9cba">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/com.jakewharton-butterknife-8.4.0_25943b2651f4470e3d7fe07b156afcdf19bbfaf9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.0.2/f8d87f15b94b8d74e7ccf61d7eedb558811cdb30/converter-gson-2.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="f8d87f15b94b8d74e7ccf61d7eedb558811cdb30">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/converter-gson-2.0.2_52d34da113359fca7e52895378993e253c5f034f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/24.1.0/8a23146e1a8c7cb4758e3d3f62449213f1e51f67/support-annotations-24.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="8a23146e1a8c7cb4758e3d3f62449213f1e51f67">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/support-annotations-24.1.0_31c16e1ee3122b0eb8ec77227778bc9cccdb3fd7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="d9ecde39b460470e655de6e47c05573d2d5a8bfb">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/com.android.support-cardview-v7-23.4.0_fec1bd8a6faeddb2738c4600308eb26a400f4fed.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.4.0_def3db604e0e0dcea1df3f17359ff971851953c6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.4.0_2d290497cb03943bb6117d8d8f9eb14b2e229445.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.4.0_0a25b6e052aa085dfd3b065c591e0f37fbdfd3e5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.0.2/43eeae0b9fb087bb3194ba59ab63a38a32fbf3e/retrofit-2.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="043eeae0b9fb087bb3194ba59ab63a38a32fbf3e">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/retrofit-2.0.2_66f57f0184c30d49a335ed774077210fc1ea60ca.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.6.2/f1bc476cc167b18e66c297df599b2377131a8947/gson-2.6.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="f1bc476cc167b18e66c297df599b2377131a8947">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/gson-2.6.2_3aa7759b5312c5061e0f2fbe125047b4959f960c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b652b678bb3de7367efebac996d64c7b06952133">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_0075aa87cfb6118a798dae3958b4a29be5f27734.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/home/pawelpiedel/AndroidStudioProjects/MoviesNEW/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.4.0_fe150726fa9a81af0a54dba01347e8b2fb9419a5.jar" />
+    </item>
+
+</items>
