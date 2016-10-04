@@ -2,14 +2,14 @@ package pl.yahoo.pawelpiedel.movies.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ActionMenuView;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
@@ -18,15 +18,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.yahoo.pawelpiedel.movies.R;
 import pl.yahoo.pawelpiedel.movies.adapter.MoviesAdapter;
-import pl.yahoo.pawelpiedel.movies.model.images.Backdrop;
-import pl.yahoo.pawelpiedel.movies.model.images.MovieImageResponse;
 import pl.yahoo.pawelpiedel.movies.model.movies.Movie;
 import pl.yahoo.pawelpiedel.movies.rest.ApiClient;
 import pl.yahoo.pawelpiedel.movies.rest.ApiInterface;
@@ -36,26 +31,35 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MovieDetails extends AppCompatActivity{
+public class MovieDetails extends AppCompatActivity {
     private static final String LOG_TAG = MovieDetails.class.getSimpleName();
 
     private static final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
     private Movie movie;
-    private List<Backdrop> backdrops = new ArrayList<>(20);
-    private int mParallaxImageHeight;
+    //private List<Backdrop> backdrops;
     private int ratingStarsNumber = 5;
+    private ShareActionProvider mShareActionProvider;
 
-    @BindView(R.id.scroll) ScrollView mScrollView;
-    @BindView(R.id.movie_detail_toolbar) Toolbar toolbar;
-    @BindView(R.id.amvDetailsMenu) ActionMenuView amvMenu;
-    @BindView(R.id.review) TextView reviewView;
-    @BindView(R.id.movie_details_image) ImageView movieImageView;
-    @BindView(R.id.ratingBar) RatingBar ratingBar;
-    @BindView(R.id.details_movie_title) TextView movieTitle;
-    @BindView(R.id.release_date) TextView releaseDateTextView;
-    @BindView(R.id.original_laguage_text_view) TextView originalLanguageTextView;
-    @BindView(R.id.runtime_text_view) TextView runtimeTextView;
-
+    @BindView(R.id.scroll)
+    ScrollView mScrollView;
+    @BindView(R.id.movie_detail_toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.amvDetailsMenu)
+    ActionMenuView amvMenu;
+    @BindView(R.id.review)
+    TextView reviewView;
+    @BindView(R.id.movie_details_image)
+    ImageView movieImageView;
+    @BindView(R.id.ratingBar)
+    RatingBar ratingBar;
+    @BindView(R.id.details_movie_title)
+    TextView movieTitle;
+    @BindView(R.id.release_date)
+    TextView releaseDateTextView;
+    @BindView(R.id.original_laguage_text_view)
+    TextView originalLanguageTextView;
+    @BindView(R.id.runtime_text_view)
+    TextView runtimeTextView;
 
 
     @Override
@@ -70,9 +74,9 @@ public class MovieDetails extends AppCompatActivity{
 
         loadMovieDetails(movie.getId());
 
-        Log.d(LOG_TAG,"Backdrops loaded : " + backdrops.size() );
+        //Log.d(LOG_TAG, "Backdrops loaded : " + backdrops.size());
         Log.d(LOG_TAG, "ID : " + movie.getId());
-        Log.d(LOG_TAG,"Runtime 2 : "+movie.getRuntime());
+        Log.d(LOG_TAG, "Runtime 2 : " + movie.getRuntime());
 
 
         loadMovieBackdrop();
@@ -94,19 +98,20 @@ public class MovieDetails extends AppCompatActivity{
 
     }
 
-    public void loadMovieDetails(int id){
-        final Call<Movie> movieCall = apiService.getMovieDetails(id,MainActivity.API_KEY);
+    public void loadMovieDetails(int id) {
+        final Call<Movie> movieCall = apiService.getMovieDetails(id, MainActivity.API_KEY);
         movieCall.enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
                 Movie detailedMovie = response.body();
 
-                Log.d(LOG_TAG,"Movie info : ");
-                Log.d(LOG_TAG,detailedMovie.toString());
-                Log.d(LOG_TAG,"Runtime 0 : " + detailedMovie.getRuntime());
+                Log.d(LOG_TAG, "Movie info : ");
+                Log.d(LOG_TAG, detailedMovie.toString());
+                Log.d(LOG_TAG, "Runtime 0 : " + detailedMovie.getRuntime());
 
+                //it gives null
                 movie.setRuntime(detailedMovie.getRuntime());
-                Log.d(LOG_TAG,"Runtime 1 : "+movie.getRuntime());
+                Log.d(LOG_TAG, "Runtime 1 : " + movie.getRuntime());
 
                 movie.setBudget(detailedMovie.getBudget());
                 movie.setGenres(detailedMovie.getGenres());
@@ -119,7 +124,7 @@ public class MovieDetails extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<Movie> call, Throwable t) {
-                Log.e(LOG_TAG,t.toString());
+                Log.e(LOG_TAG, t.toString());
             }
         });
 
@@ -131,7 +136,7 @@ public class MovieDetails extends AppCompatActivity{
         /*It products NullPointerException because setters in "enqueue" method doesn't work. Don't know why. ? .
          * Is it because anonymous class ??? */
 
-       // runtimeTextView.setText(movie.getRuntime());
+        // runtimeTextView.setText(movie.getRuntime());
     }
 
     private void setOrignalLanguage() {
@@ -139,7 +144,7 @@ public class MovieDetails extends AppCompatActivity{
     }
 
     private void loadMovieBackdrop() {
-        Glide.with(getApplicationContext()).load(MoviesAdapter.POSTER_BASE_URL+movie.getBackdropPath())
+        Glide.with(getApplicationContext()).load(MoviesAdapter.POSTER_BASE_URL + movie.getBackdropPath())
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(movieImageView);
     }
@@ -149,8 +154,8 @@ public class MovieDetails extends AppCompatActivity{
     }
 
     private void setRatingBar() {
-        double ratingProcent = movie.getVoteAverage()/10;
-        ratingBar.setRating((float) ratingProcent*ratingStarsNumber);
+        double ratingProcent = movie.getVoteAverage() / 10;
+        ratingBar.setRating((float) ratingProcent * ratingStarsNumber);
     }
 
     private void setMovieTitle() {
@@ -166,8 +171,30 @@ public class MovieDetails extends AppCompatActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_details,amvMenu.getMenu());
+        getMenuInflater().inflate(R.menu.menu_details, amvMenu.getMenu());
+
+        MenuItem menuItem = menu.findItem(R.id.action_share);
+
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+        Log.d("NullPointerException", "Is mShareActionProvider null: " + (mShareActionProvider == null));
+
+        mShareActionProvider.setShareIntent(createShareIntent());
+
         return true;
+    }
+
+    // Create and return the Share Intent
+    private Intent createShareIntent() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(MoviesAdapter.PARCELABLE_KEY, movie.toString());
+        return shareIntent;
+    }
+
+    // Sets new share Intent.
+    // Use this method to change or set Share Intent in your Activity Lifecycle.
+    private void changeShareIntent(Intent shareIntent) {
+        mShareActionProvider.setShareIntent(shareIntent);
     }
 
     private void setToolbarBackgroundColor() {
@@ -184,8 +211,6 @@ public class MovieDetails extends AppCompatActivity{
         Intent intent = getIntent();
         return intent.getExtras().getParcelable(MoviesAdapter.PARCELABLE_KEY);
     }
-
-
 
 
     @Override
