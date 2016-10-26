@@ -36,9 +36,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         this.movies = moviesList;
     }
 
-
-
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -87,6 +84,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
             clickListener.onItemClick(itemView,getAdapterPosition());
         }
 
+    }
+
+    public void updateData(List<Movie> movies){
+        notifyDataSetChanged();
     }
 
 

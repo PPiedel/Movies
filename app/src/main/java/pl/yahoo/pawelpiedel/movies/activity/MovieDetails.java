@@ -110,7 +110,7 @@ public class MovieDetails extends AppCompatActivity {
                 Log.d(LOG_TAG, "Runtime 0 : " + detailedMovie.getRuntime());
 
                 //it gives null
-                movie.setRuntime(detailedMovie.getRuntime());
+                //movie.setRuntime(detailedMovie.getRuntime());
                 Log.d(LOG_TAG, "Runtime 1 : " + movie.getRuntime());
 
                 movie.setBudget(detailedMovie.getBudget());

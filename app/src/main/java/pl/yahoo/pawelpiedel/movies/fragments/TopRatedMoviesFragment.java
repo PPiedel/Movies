@@ -2,9 +2,11 @@ package pl.yahoo.pawelpiedel.movies.fragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,15 +15,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import pl.yahoo.pawelpiedel.movies.R;
 import pl.yahoo.pawelpiedel.movies.activity.DividerItemDecoration;
 import pl.yahoo.pawelpiedel.movies.activity.MainActivity;
 import pl.yahoo.pawelpiedel.movies.activity.MovieDetails;
+import pl.yahoo.pawelpiedel.movies.adapter.EmptyRecyclerViewAdapter;
 import pl.yahoo.pawelpiedel.movies.adapter.MoviesAdapter;
 import pl.yahoo.pawelpiedel.movies.adapter.OnItemClickListener;
 import pl.yahoo.pawelpiedel.movies.model.movies.Movie;
@@ -76,7 +81,7 @@ public class TopRatedMoviesFragment extends Fragment {
         recyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener((GridLayoutManager) layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
-                Log.d(LOG_TAG,"onLoadMore method reached");
+                //Log.d(LOG_TAG,"onLoadMore method reached");
                 currentPage = page ;
                 loadMovies(currentPage+1);
 
@@ -95,9 +100,11 @@ public class TopRatedMoviesFragment extends Fragment {
             }
         });
 
-        recyclerView.setAdapter(moviesAdapter);
-
-
+        if (movies == null || movies.size() == 0){
+            recyclerView.setAdapter(new EmptyRecyclerViewAdapter(getString(R.string.no_data_available)));
+        }else {
+            recyclerView.setAdapter(moviesAdapter);
+        }
     }
 
     public void loadMovies(int page){
@@ -106,14 +113,14 @@ public class TopRatedMoviesFragment extends Fragment {
         movieResponseCall.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                Log.d(LOG_TAG,""+response.code());
-                Log.d(LOG_TAG, movieResponseCall.request().toString());
-                Log.d(LOG_TAG,"Total pages : " + response.body().getTotalPages());
-                Log.d(LOG_TAG,"Actual page : " + response.body().getPage());
-                Log.d(LOG_TAG,"Total movies : " + response.body().getTotalMovies());
+                //Log.d(LOG_TAG,""+response.code());
+                //Log.d(LOG_TAG, movieResponseCall.request().toString());
+                //Log.d(LOG_TAG,"Total pages : " + response.body().getTotalPages());
+                //Log.d(LOG_TAG,"Actual page : " + response.body().getPage());
+                //Log.d(LOG_TAG,"Total movies : " + response.body().getTotalMovies());
 
                 movies.addAll(response.body().getMovies()) ;
-                Log.d(LOG_TAG, "Total loaded movies: " + movies.size() );
+                //Log.d(LOG_TAG, "Total loaded movies: " + movies.size() );
 
                 moviesAdapter.notifyDataSetChanged();
 
@@ -122,7 +129,7 @@ public class TopRatedMoviesFragment extends Fragment {
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
                 Log.e(LOG_TAG,t.toString());
-                showAlertDialog();
+                //showAlertDialog();
             }
         });
 
